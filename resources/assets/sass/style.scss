@@ -1,0 +1,260 @@
+/*================COMMON===================*/
+*{
+	box-sizing: border-box;
+}
+body{
+	margin: 0; padding: 0;
+	font-family: 'Roboto', sans-serif;
+}
+a{
+	text-decoration: none;
+}
+.clearfix::after, .clearfix::before{
+	content: "";
+	display: table;
+}
+.clearfix::after{
+	clear: both;
+}
+%define{
+	position: relative;
+	display: block;
+	width: 100%;
+}
+@mixin border_radius($value){
+	border-radius: $value;
+	-webkit-border-radius: $value;
+	-moz-border-radius: $value;
+}
+.container{
+	width: 80%;
+	margin: 0 auto;
+}
+.msg-success{
+	color: #009933;
+}
+.msg-errors{
+	ul > li {
+		color: #cc3300;
+	} 
+}
+.btn{
+	padding: 7px  15px;
+	margin: 0 10px;
+	display: block;
+	float: left;
+	color: #ffffff;
+	@include border_radius(3px);
+}
+.btnUpdate{
+	background-color: #0099ff;
+	border: 1px solid #006bb3;
+	
+}
+.btnDel{
+	border: 1px solid #DD262F;
+	background-color: #E14347;
+}
+/*================HEADER===================*/
+header{
+	@extend %define;
+	background-color: #f4645f;
+	padding: 20px 0;
+	.header{
+		&__logo{
+			float: left;
+			color: #ffffff;
+			display: block;
+		}
+		&__menu{
+			float:right;
+			ul{
+				margin: 0; padding: 0;
+				li{
+					list-style: none;
+					display: inline-block;
+					a{
+						color: #ffffff;
+						font-weight: bold;
+						line-height: 200%;
+						padding: 0 10px;
+					}
+					a:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*================BODY===================*/
+section.body{
+	@extend %define;
+	min-height: 500px;
+	padding: 20px 0;
+	.block{
+		width: 50%;
+		margin: 10px auto;
+		color: #363636;
+		border: 1px solid #DCDCDC;
+		@include border_radius(3px);
+		&__title{
+			background-color: #F5F5F5;
+			padding: 10px;
+			span{
+				line-height: 200%;
+				font-weight: bold;
+			}
+		}
+		&__content{
+			padding: 10px;
+			form{
+				display: table;
+				width: 100%;
+				div{
+					display: table-row;
+					label, input, button{
+						display: table-cell;
+						margin:10px 0;
+						padding: 10px;
+						display: block;
+					}
+					label {
+						font-weight: bold;
+					}
+					input[type="text"], input[type="password"]{
+						border: 1px solid #CBCBCB;
+						@include border_radius(3px);
+						width: 100%;
+					}
+				}
+			}
+			&_top{
+				border-bottom: 2px solid #CBCBCB;
+				padding: 5px 0;
+				font-weight: bold;
+			}
+			&_list{
+				@extend %define;
+				margin: 10px 0;
+				padding: 10px 0;
+				border-bottom: 1px solid #CBCBCB;
+				&_left{
+					float: left;
+					line-height: 250%;
+				}
+				&_right{
+					float: right;
+					ul{
+						margin: 0; padding: 0;
+						li{
+							list-style:none;
+							float: left;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*================FOOTER===================*/
+footer{
+	@extend %define;
+	border-top: 1px solid #000000;
+	padding: 20px 0;
+	a{
+		color: #000000;
+	}
+	a:hover{
+		text-decoration: underline;
+	}
+	.footer{
+		&__left{
+			float: left;
+		}
+		&__right{
+			float: right
+		}
+	}
+}
+
+/*================RWD===================*/
+$res_320: "only screen and (min-width: 320px) and (max-width: 374px)";
+$res_375: "only screen and (min-width: 375px) and (max-width: 424px)";
+$res_425: "only screen and (min-width: 425px) and (max-width: 767px)";
+$res_768: "only screen and (min-width: 768px) and (max-width: 991px)";
+$res_992: "only screen and (min-width: 992px) and (max-width: 1023px)";
+$res_1024: "only screen and (min-width: 1024px) and (max-width: 1199px)";
+$res_1200: "only screen and (min-width: 1200px)";
+
+@mixin responsive_320(){
+	@media #{$res_320} {
+		@content;
+	}
+}
+
+@mixin responsive_375(){
+	@media #{$res_375} {
+		@content;
+	}
+}
+
+@mixin responsive_425(){
+	@media #{$res_425} {
+		@content;
+	}
+}
+
+@mixin responsive_768(){
+	@media #{$res_768} {
+		@content;
+	}
+}
+
+@mixin responsive_992(){
+	@media #{$res_992} {
+		@content;
+	}
+}
+
+@mixin responsive_1024(){
+	@media #{$res_1024} {
+		@content;
+	}
+}
+
+@mixin responsive_1200(){
+	@media #{$res_1200} {
+		@content;
+	}
+}
+
+@include responsive_320{
+	
+}
+
+@include responsive_375{
+	
+}
+
+@include responsive_425{
+	
+}
+
+@include responsive_768{
+	
+}
+
+@include responsive_992{
+	
+}
+
+@include responsive_1024{
+	
+}
+
+@include responsive_1200{
+	
+}
