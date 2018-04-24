@@ -8,7 +8,7 @@
 				<span>New Product</span>
 			</div>
 			<div class="block__content">
-				<form action="/products" method="POST">
+				<form action="/products" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div>
 						<label>Product Informaton</label>
@@ -18,6 +18,9 @@
 					</div>
 					<div>
 						<input type="text" name="description" value="{{ old('description') }}" placeholder="Description">
+					</div>
+					<div>
+						<input type="file" name="photo">
 					</div>
 					<div>
 						<button type="submit" name="btnAdd">
@@ -40,7 +43,7 @@
 				</form>
 			</div>						
 		</div>
-		<div class="block">
+		{{--<div class="block">
 			<div class="block__title">
 				<span>Current Products</span>
 			</div>
@@ -69,6 +72,6 @@
 					<p>List of products is empty!</p>
 				@endif
 			</div>
-		</div>
-
+		</div>--}}
+		@include('product.showprod')
 @endsection

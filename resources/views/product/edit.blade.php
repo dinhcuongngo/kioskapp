@@ -8,7 +8,7 @@
 				<span>Edit Product</span>
 			</div>
 			<div class="block__content">
-				<form action="/products/{{ $product->id }}" method="POST">
+				<form action="/products/{{ $product->id }}" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="PUT">
 					<div>
@@ -20,6 +20,12 @@
 					</div>
 					<div>
 						<input type="text" name="description" value="{{ $product->description }}" placeholder="Description">
+					</div>
+					<div>
+						<input type="file" name="photo">
+					</div>
+					<div>
+						<img src="{{ asset($product->photo) }}" alt="product's photo">
 					</div>
 					<div>
 						<button type="submit" name="btnAdd">

@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
+            $table->string('photo');
             $table->unsignedInteger('seller_id');
             $table->timestamps();
             $table->softDeletes();

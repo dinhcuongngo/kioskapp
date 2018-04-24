@@ -43,4 +43,7 @@ Route::get('product/{product}/category','Product\ProductCategoryController@index
 Route::post('product/{product}/category','Product\ProductCategoryController@store');
 Route::delete('product/{product}/category/{category}','Product\ProductCategoryController@destroy');
 
+//===SELLERS
+Route::resource('sellers', 'Seller\SellerController',['except'=>['create','edit']]);
+Route::get('seller/{seller}/product', 'Seller\SellerController@viewSellerProduct');
 
