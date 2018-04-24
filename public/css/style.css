@@ -29,12 +29,12 @@ header, section.body, section.body .block__content_list, footer {
 .msg-success {
   color: #009933; }
 
-.msg-errors ul > li {
+.msg-errors {
   color: #cc3300; }
 
 .btn {
   padding: 7px  15px;
-  margin: 0 10px;
+  margin: 0 5px;
   display: block;
   float: left;
   color: #ffffff;
@@ -49,6 +49,22 @@ header, section.body, section.body .block__content_list, footer {
 .btnDel {
   border: 1px solid #DD262F;
   background-color: #E14347; }
+
+.btnReset {
+  background-color: #00cc44;
+  border: 1px solid #00b33c; }
+
+.link-right {
+  float: right;
+  margin: 10px 0;
+  padding: 10px;
+  display: block;
+  background-color: #f4d597;
+  border: 1px solid #e29d12;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  color: #4286f4; }
 
 /*================HEADER===================*/
 header {
@@ -112,6 +128,11 @@ section.body {
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             width: 100%; }
+          section.body .block__content form div input[type="checkbox"] {
+            display: inline-block; }
+          section.body .block__content form div span {
+            margin: 0 5px;
+            display: inline-block; }
       section.body .block__content_top {
         border-bottom: 2px solid #CBCBCB;
         padding: 5px 0;

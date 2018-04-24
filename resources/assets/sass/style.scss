@@ -34,13 +34,11 @@ a{
 	color: #009933;
 }
 .msg-errors{
-	ul > li {
-		color: #cc3300;
-	} 
+	color: #cc3300; 
 }
 .btn{
 	padding: 7px  15px;
-	margin: 0 10px;
+	margin: 0 5px;
 	display: block;
 	float: left;
 	color: #ffffff;
@@ -54,6 +52,20 @@ a{
 .btnDel{
 	border: 1px solid #DD262F;
 	background-color: #E14347;
+}
+.btnReset{
+	background-color: #00cc44;
+	border: 1px solid #00b33c;
+}
+.link-right{
+	float:right; 
+	margin: 10px 0; 
+	padding: 10px;  
+	display: block;
+	background-color: #f4d597;
+	border: 1px solid #e29d12;
+	@include border_radius(3px);
+	color: #4286f4;
 }
 /*================HEADER===================*/
 header{
@@ -127,6 +139,13 @@ section.body{
 						border: 1px solid #CBCBCB;
 						@include border_radius(3px);
 						width: 100%;
+					}
+					input[type="checkbox"]{
+						display: inline-block;
+					}
+					span{
+						margin: 0 5px;
+						display: inline-block;
 					}
 				}
 			}

@@ -1,28 +1,30 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Category')
+@section('title', 'Users')
 
 @section('content')
 		<div class="block">
 			<div class="block__title">
-				<span>Edit Category</span>
+				<span>Update User's Profile</span>
 			</div>
 			<div class="block__content">
-				<form action="/categories/{{ $category->id }}" method="POST">
+				@foreach($data as $user)
+				<form action="/users/{{ $user->id }}" method="POST">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="PUT">
+					
 					<div>
-						<label>Category</label>
+						<label>User Profile</label>
 					</div>
 					<div>
-						<input type="text" name="name" value="{{ $category->name }}" placeholder="Name">
+						<input type="text" name="name" value="{{ $user->name }}" placeholder="Name">
 					</div>
 					<div>
-						<input type="text" name="description" value="{{ $category->description }}" placeholder="Description">
+						<input type="text" name="email" value="{{ $user->email }}" placeholder="Email">
 					</div>
 					<div>
 						<button type="submit" name="btnAdd">
-							<i class="fas fa-edit"></i> Update category
+							<i class="fas fa-edit"></i> Update user
 						</button>
 					</div>
 					@if(Session::has('success'))
@@ -36,10 +38,21 @@
 					</div>
 					@endif
 					<div>
-						@include('common.error')
+						<p class="msg-errors">	
+						<?php //dd(Session::get('fails')); ?>
+						{{-- @if($errors->get('fails'))
+							{{ $errors->get('fails')[0] }}
+						@endif --}}
+
+						@if($errors->all())
+							{{ $errors->first() }}
+						@endif
+						</p>
 					</div>
+					
 				</form>
-			</div>				
+				@endforeach
+			</div>						
 		</div>
 
 @endsection

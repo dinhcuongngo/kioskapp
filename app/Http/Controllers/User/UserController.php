@@ -6,24 +6,23 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
-        $this->middleware('guest');
+        $this->middleware('auth');
+        //$this->middleware('role');
     }
 
     public function index()
     {
         //
+        $users = User::all();
+        return view('user.users',['users'=>$users]);
     }
 
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request)
     {
@@ -56,32 +55,43 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect('signup')->with('success','Successfully registered!');
+        return back()->with('success','Successfully registered!');
     }
 
     public function show(User $user)
     {
         //
+        $data = User::findOrFail($user);
+
+        return view('user.edit',['data'=>$data]);
     }
 
-    public function edit(User $user)
-    {
-        //
-    }
 
     public function update(Request $request, User $user)
     {
         //
-    }
 
-    public function destroy(User $user)
-    {
-        //
-    }
+        if($request->has('name'))
+        {
+            $user->name = $request->name;
+        }
 
-    public function viewSignup()
-    {
-        return view('user.signup');
+        if($request->has('email') && $user->email != $request->email)
+        {
+            $user->verified = User::UNVERIFIED_USER;
+            $user->verification_token = User::generateVerificationCode();
+            $user->email = $request->email;
+        }
+
+        if($user->isClean())
+        {
+            //return back()->with('fails', 'You need to specify the different value for update!');
+            return back()->withErrors(['fails' => 'You need to specify the different value for update!']);
+        }
+
+        $user->save();
+
+        return back()->with('success','Successfully updated!');
     }
 
     public function viewLogin()
@@ -89,21 +99,44 @@ class UserController extends Controller
         return view('user.login');
     }
 
-    public function checkLogin(Request $request)
+    public function viewChangePasswd($user)
     {
-        $credentials = $request->only([
-            'email', 'password',
-        ]);
-        if(Auth::attempt($credentials))
+        //dd($user);
+        return view('user.change',['user'=>$user]);
+    }
+
+    public function changePasswd(Request $request, User $user)
+    {
+        //dd($user);
+        $rules = [
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ];
+
+        $this->validate($request, $rules);
+
+        if(Hash::check($request->current_password, Auth::user()->password)){
+            $user->password = bcrypt($request->password);
+        }
+        else
         {
-            return redirect('/');
+            return back()->withErrors(['fails' => 'Authentication is failed!']);
+        }
+        
+        if($user->isDirty())
+        {
+            $user->save();
+
+            return back()->with('success',"Successfully changed password!");
         }
     }
 
-    public function logout()
+    public function destroy(User $user)
     {
-        Auth::logout();
+        //
+        $user->delete();
 
-        return redirect('/');
+        return back();
     }
+
 }

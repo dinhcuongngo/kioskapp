@@ -1,28 +1,33 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Category')
+@section('title', 'Users')
 
 @section('content')
 		<div class="block">
 			<div class="block__title">
-				<span>Edit Category</span>
+				<span>Update User's Profile</span>
 			</div>
 			<div class="block__content">
-				<form action="/categories/{{ $category->id }}" method="POST">
+				@isset($user)
+				<form action="/changePasswd/{{ $user}}" method="POST">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="PUT">
+					
 					<div>
-						<label>Category</label>
+						<label>Change password</label>
 					</div>
 					<div>
-						<input type="text" name="name" value="{{ $category->name }}" placeholder="Name">
+						<input type="password" name="current_password" value="" placeholder="Current Password">
 					</div>
 					<div>
-						<input type="text" name="description" value="{{ $category->description }}" placeholder="Description">
+						<input type="password" name="password" value="" placeholder="New Password">
+					</div>
+					<div>
+						<input type="password" name="password_confirmation" value="" placeholder="Confirmed Password">
 					</div>
 					<div>
 						<button type="submit" name="btnAdd">
-							<i class="fas fa-edit"></i> Update category
+							<i class="fas fa-edit"></i> Change password
 						</button>
 					</div>
 					@if(Session::has('success'))
@@ -36,10 +41,16 @@
 					</div>
 					@endif
 					<div>
-						@include('common.error')
+						<p class="msg-errors">	
+						@if($errors->all())
+							{{ $errors->first() }}
+						@endif
+						</p>
 					</div>
+					
 				</form>
-			</div>				
+				@endif
+			</div>						
 		</div>
 
 @endsection

@@ -18,11 +18,13 @@
 					</div>
 					<div>
 						<button type="submit" name="btnAdd">
-							<i class="fas fa-user-plus"></i> Login
+							<i class="fas fa-sign-in-alt"></i> Login
 						</button>
 					</div>
 					<div>
-						@include('common.error')
+						@isset($fails)
+							{{ $fails }}
+						@endisset
 					</div>
 				</form>
 			</div>					

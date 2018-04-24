@@ -14,18 +14,33 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('home',function(){
+	return view('home');
+})->name('home');
 
 //===CATEGORY
 Route::resource('categories','Category\CategoryController',['except'=>['create','edit']]);
 Route::get('categories/{category}', 'Category\CategoryController@show')->name('edit');
 
 //===USER
-Route::resource('users','User\UserController',['except'=>['create','edit']]);
-Route::get('login', function(){
-	return view('user.login');
-})->name('login');
-Route::get('logout', 'User\UserController@logout');
-Route::post('login','User\UserController@checkLogin');
-Route::get('signup', 'User\UserController@viewSignup');
+Route::resource('users','User\UserController',['except'=>['create','edit']])->middleware('role');
+
+Route::get('login', 'User\CommonUserController@viewLogin');
+Route::post('login','User\CommonUserController@checkLogin');
+
+Route::get('logout', 'User\CommonUserController@logout');
+
+Route::get('signup', 'User\CommonUserController@viewSignUp');
+Route::post('signup', 'User\CommonUserController@signUp');
+
+Route::get('changePasswd/{user}', 'User\UserController@viewChangePasswd');
+Route::put('changePasswd/{user}', 'User\UserController@changePasswd');
+
+//===PRODUCT
+Route::resource('products', 'Product\ProductController', ['except'=>['create','edit']]);
+Route::get('products/{product}', 'Product\ProductController@show');
+Route::get('product/{product}/category','Product\ProductCategoryController@index');
+Route::post('product/{product}/category','Product\ProductCategoryController@store');
+Route::delete('product/{product}/category/{category}','Product\ProductCategoryController@destroy');
+
 

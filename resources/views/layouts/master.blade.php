@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ListApp::@yield('title')</title>
-	<link rel="stylesheet" href="../css/normalize.css">
-	<link rel="stylesheet" href="../css/style.css">
+	<title>KioskApp::@yield('title')</title>
+	<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-	<link rel="stylesheet" href="../css/fontawesome-all.css">
+	<link rel="stylesheet" href="{{ asset('css/fontawesome-all.css') }}">
 </head>
 <body>
 <!-- START OF HEADER-->

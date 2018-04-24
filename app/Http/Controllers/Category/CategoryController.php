@@ -55,12 +55,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
-        $data = Category::findOrFail($category);
-
-        //dd($data);
-
-        return view('category.edit',['category'=>$data]);
+        return view('category.edit',['category'=>$category]);
     }
 
     /**

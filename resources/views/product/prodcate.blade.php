@@ -1,33 +1,30 @@
 @extends('layouts.master')
 
-@section('title','Signup')
+@section('title', 'Product')
 
 @section('content')
 		<div class="block">
 			<div class="block__title">
-				<span>Signup</span>
+				<span>Edit Product</span>
 			</div>
 			<div class="block__content">
-				<form action="/signup" method="POST">
+				<form action="/product/{{ $product->id }}/category" method="POST">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div>
-						<label>There is no gap between us!</label>
+						<label>Product Information</label>
 					</div>
 					<div>
-						<input type="text" name="name" value="{{ old('name')}}" placeholder="Name">
+						<input type="text" name="name" value="{{ $product->name }}" placeholder="Name" readonly="readonly">
 					</div>
-					<div>
-						<input type="text" name="email" value="{{ old('email')}}" placeholder="Email">
-					</div>
-					<div>
-						<input type="password" name="password" value="" placeholder="Password">
-					</div>
-					<div>
-						<input type="password" name="password_confirmation" value="" placeholder="Confirm password">
-					</div>
+					@foreach($categories as $category)
+						<div>
+							<input type="checkbox" name="categories[]" value="{{ $category->id}}">
+							<span>{{ $category->name }}</span>
+						</div>
+					@endforeach
 					<div>
 						<button type="submit" name="btnAdd">
-							<i class="fas fa-user-plus"></i> Signup
+							<i class="fas fa-edit"></i> Add categories
 						</button>
 					</div>
 					@if(Session::has('success'))
@@ -46,4 +43,5 @@
 				</form>
 			</div>					
 		</div>
+
 @endsection

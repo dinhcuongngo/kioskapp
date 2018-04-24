@@ -1,7 +1,7 @@
 		<a href="" class="footer__left">
 			Designed by 
 			@if(Auth::check())
-				{{ Auth::user()->name }}
+				{{ Auth::user()->name }} - {{ Auth::user()->id }}
 			@else
 				me
 			@endif 

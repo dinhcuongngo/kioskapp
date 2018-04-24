@@ -3,5 +3,5 @@
 @section('title','Home')
 
 @section('content')
-    <h1>Welcome to the Kiosk App!</h1>
+    <h1>Hello! How are you!</h1>
 @endsection
